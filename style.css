@@ -1,0 +1,288 @@
+/* =====================================================
+   1. VARIABEL WARNA
+   Warna ditulis sekali di sini, lalu dipakai berkali-kali
+   lewat var(--nama). Mau ganti tema? Cukup ubah di sini.
+   ===================================================== */
+:root {
+  --navy:   #1B2A59;   /* biru tua: warna utama */
+  --blue:   #4F7CFF;   /* biru terang: aksen */
+  --yellow: #FFD23F;   /* kuning: penyemangat */
+  --cream:  #FFF9E8;   /* krem: latar hero */
+  --soft:   #F4F7FF;   /* biru sangat muda: latar selang-seling */
+  --text:   #2B3350;   /* warna teks biasa */
+  --muted:  #667090;   /* warna teks abu-abu */
+  --green:  #25D366;   /* hijau khas WhatsApp */
+  --radius: 20px;      /* kelengkungan sudut kartu */
+  --shadow: 0 10px 30px rgba(27, 42, 89, .12);   /* bayangan lembut */
+}
+
+
+/* =====================================================
+   2. PENGATURAN DASAR
+   ===================================================== */
+
+/* Hapus jarak bawaan browser supaya kita yang atur sendiri */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Scroll halus saat klik menu, dan sisakan ruang buat navbar */
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background: #fff;
+  line-height: 1.65;          /* jarak antar baris biar enak dibaca */
+}
+
+/* Semua judul pakai font Fredoka yang bulat dan ramah */
+h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; color: var(--navy); line-height: 1.2; }
+
+a  { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* .container = pembungkus isi supaya nggak terlalu lebar di layar besar */
+.container { width: min(1120px, 92%); margin: 0 auto; }
+.narrow    { width: min(680px, 92%); }
+
+
+/* =====================================================
+   3. TOMBOL
+   ===================================================== */
+.btn {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  padding: 13px 26px;
+  border-radius: 999px;                 /* angka besar = ujung bulat penuh */
+  font-weight: 600;
+  border: 2px solid var(--navy);
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 4px 4px 0 var(--yellow);  /* bayangan kuning ala sticker */
+  transition: transform .2s, box-shadow .2s;
+}
+
+/* Saat kursor diarahkan ke tombol, tombol "terangkat" */
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--yellow); }
+
+.btn-outline       { background: transparent; color: var(--navy); box-shadow: none; }
+.btn-outline:hover { background: var(--navy); color: #fff; box-shadow: none; }
+.btn-small         { padding: 8px 18px; font-size: .85rem; box-shadow: 3px 3px 0 var(--yellow); }
+.btn-block         { width: 100%; margin-top: 6px; }
+
+
+/* =====================================================
+   4. NAVBAR
+   ===================================================== */
+.navbar {
+  position: sticky;            /* "lengket": tetap di atas saat di-scroll */
+  top: 0;
+  z-index: 50;                 /* angka besar = tampil paling depan */
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(10px); /* efek kaca buram */
+}
+/* Class ini ditambahkan oleh JavaScript saat halaman di-scroll */
+.navbar.scrolled { box-shadow: 0 4px 20px rgba(27, 42, 89, .1); }
+
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.logo      { font-family: 'Fredoka', sans-serif; font-size: 1.35rem; font-weight: 600; color: var(--navy); }
+.logo b    { color: var(--blue); }
+
+.nav-links { display: flex; align-items: center; gap: 26px; font-weight: 500; font-size: .93rem; }
+.nav-links a:not(.btn):hover { color: var(--blue); }
+
+/* Tombol ☰ disembunyikan di laptop, baru muncul di HP (lihat bagian responsif) */
+.menu-btn { display: none; background: none; border: none; font-size: 1.7rem; color: var(--navy); cursor: pointer; }
+
+
+/* =====================================================
+   5. HERO (bagian pembuka)
+   ===================================================== */
+.hero { background: linear-gradient(180deg, var(--cream), #fff); padding: 70px 0 60px; overflow: hidden; }
+
+/* grid 2 kolom: kiri tulisan, kanan gambar */
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+
+.badge { display: inline-block; background: var(--yellow); color: var(--navy); font-weight: 600; font-size: .82rem; padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; }
+
+/* clamp(min, ideal, max) = ukuran huruf menyesuaikan lebar layar */
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; }
+.hl      { color: var(--blue); }
+.hero p  { color: var(--muted); max-width: 480px; margin-bottom: 26px; }
+
+.hero-cta    { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 26px; }
+.hero-points { display: flex; gap: 18px; flex-wrap: wrap; font-weight: 500; font-size: .9rem; color: var(--navy); }
+.hero-art svg { width: 100%; max-width: 440px; margin: 0 auto; display: block; }
+
+/* Animasi kertas melayang: naik 10px lalu turun, terus berulang */
+.float { animation: melayang 3.5s ease-in-out infinite; }
+@keyframes melayang {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+
+/* =====================================================
+   6. SECTION UMUM (dipakai semua bagian)
+   ===================================================== */
+.section     { padding: 80px 0; }
+.section.alt { background: var(--soft); }   /* bagian selang-seling punya latar beda */
+
+.section-head    { text-align: center; max-width: 620px; margin: 0 auto 48px; }
+.eyebrow         { display: inline-block; color: var(--blue); font-weight: 600; font-size: .85rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+.section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 12px; }
+.section-head p  { color: var(--muted); }
+
+
+/* =====================================================
+   7. KARTU LAYANAN
+   ===================================================== */
+
+/* auto-fit + minmax: muat sebanyak mungkin kolom (minimal 300px per kartu).
+   Di laptop jadi 3 kolom, di HP otomatis jadi 1 kolom. */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;                      /* potong isi yang keluar dari sudut bulat */
+  box-shadow: var(--shadow);
+  border: 2px solid #EEF1FA;
+  transition: transform .3s, box-shadow .3s;
+}
+/* Kartu terangkat saat kursor mendekat */
+.card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(27, 42, 89, .18); }
+
+.card-img { height: 190px; display: grid; place-items: center; padding: 14px; }
+.card-img svg { height: 100%; width: auto; transition: transform .4s; }
+.card:hover .card-img svg { transform: scale(1.08) rotate(-2deg); }   /* gambar ikut membesar */
+
+/* Warna latar gambar, satu warna untuk tiap layanan */
+.c-blue   { background: #E3EBFF; }
+.c-yellow { background: #FFF1C2; }
+.c-green  { background: #DDF7E8; }
+.c-purple { background: #EBE3FF; }
+.c-orange { background: #FFE5D3; }
+.c-red    { background: #FFE0E0; }
+
+.card-body    { padding: 22px 24px 26px; }
+.card-body h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.card-body p  { color: var(--muted); font-size: .92rem; margin-bottom: 14px; }
+.card-link       { font-weight: 600; color: var(--blue); font-size: .93rem; }
+.card-link:hover { color: var(--navy); }
+
+
+/* =====================================================
+   8. KEUNGGULAN & LANGKAH ORDER
+   ===================================================== */
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
+.feature  { background: #fff; padding: 28px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); }
+.feature span { font-size: 2.2rem; display: block; margin-bottom: 8px; }
+.feature h4   { font-size: 1.15rem; margin-bottom: 6px; }
+.feature p    { color: var(--muted); font-size: .9rem; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 30px; text-align: center; }
+/* Lingkaran kuning bernomor */
+.num {
+  width: 60px; height: 60px; margin: 0 auto 14px;
+  display: grid; place-items: center;
+  background: var(--yellow); color: var(--navy);
+  font-family: 'Fredoka', sans-serif; font-size: 1.6rem; font-weight: 700;
+  border-radius: 50%; border: 3px solid var(--navy);
+}
+.step h4 { font-size: 1.2rem; margin-bottom: 4px; }
+.step p  { color: var(--muted); font-size: .92rem; }
+
+
+/* =====================================================
+   9. FORM PESAN
+   ===================================================== */
+.order-form { background: #fff; padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow); display: grid; gap: 16px; }
+.order-form label { display: grid; gap: 6px; font-weight: 500; font-size: .92rem; color: var(--navy); }
+.order-form input,
+.order-form select,
+.order-form textarea {
+  font-family: inherit; font-size: .95rem;
+  padding: 12px 14px;
+  border: 2px solid #DDE3F5; border-radius: 12px;
+  outline: none;
+}
+/* Kolom isian berubah biru saat sedang diklik/diisi */
+.order-form input:focus,
+.order-form select:focus,
+.order-form textarea:focus { border-color: var(--blue); }
+
+
+/* =====================================================
+   10. LOKASI & FOOTER
+   ===================================================== */
+.location { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--cream); border-radius: 28px; padding: 40px; }
+.loc-info h3 { font-size: 1.6rem; margin-bottom: 10px; }
+.loc-info p  { margin-bottom: 14px; }
+.loc-art svg { width: 100%; border-radius: 18px; }
+
+.footer { background: var(--navy); color: #C9D2F2; text-align: center; padding: 26px 0; font-size: .9rem; }
+
+
+/* =====================================================
+   11. TOMBOL WHATSAPP MENGAMBANG
+   ===================================================== */
+.wa-float {
+  position: fixed;             /* menempel di layar, bukan di halaman */
+  right: 20px; bottom: 20px;
+  width: 60px; height: 60px;
+  background: var(--green);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 1.8rem;
+  z-index: 60;
+  animation: denyut 2.2s infinite;
+}
+/* Efek lingkaran hijau yang melebar lalu hilang, kesannya "berdenyut" */
+@keyframes denyut {
+  0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, .6); }
+  70%  { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+
+/* =====================================================
+   12. ANIMASI MUNCUL SAAT SCROLL
+   Awalnya elemen transparan dan agak turun.
+   Saat JavaScript menambahkan class "show", elemen naik dan terlihat.
+   ===================================================== */
+.reveal      { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.show { opacity: 1; transform: none; }
+
+
+/* =====================================================
+   13. RESPONSIF (tampilan khusus layar kecil / HP)
+   Aturan di bawah hanya berlaku kalau lebar layar <= 860px
+   ===================================================== */
+@media (max-width: 860px) {
+  /* 2 kolom jadi 1 kolom (ditumpuk ke bawah) */
+  .hero-grid, .location { grid-template-columns: 1fr; }
+  .hero-art     { order: -1; }              /* gambar pindah ke atas tulisan */
+  .hero-art svg { max-width: 300px; }
+
+  /* Menu berubah jadi dropdown yang disembunyikan dulu */
+  .menu-btn  { display: block; }
+  .nav-links {
+    position: absolute; top: 70px; left: 0; right: 0;
+    background: #fff;
+    flex-direction: column;
+    padding: 20px 0 26px; gap: 18px;
+    box-shadow: 0 12px 20px rgba(27, 42, 89, .1);
+    display: none;
+  }
+  .nav-links.open { display: flex; }         /* class "open" ditambah lewat JavaScript */
+
+  .section  { padding: 60px 0; }
+  .location { padding: 26px; }
+}
+
+/* Hormati pengguna yang mematikan animasi di pengaturan HP-nya */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
